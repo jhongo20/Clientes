@@ -15,9 +15,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -41,9 +44,48 @@ public class Registro extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         //oculta del formulario el campo Id del formulario
         this.txtId.setVisible(false);
+        construirTabla();
 
     }
 
+    //Metodo para la matriz con la informaci[on de los objetos
+    private String[][] obtenerMatriz(){
+        //Se inicializa el controlador
+        controlador = new controladorCliente();
+        //Se crea el array donde se almacenaran los objetos obtenidos del controlador
+        ArrayList<Cliente> clientes = (ArrayList<Cliente>) controlador.listarClientes();
+        //se crea la matriz definiendo la cantida de filas y columnas
+        String matrizInfo[][] = new String[clientes.size()][7];
+        
+        //se recorre el array y se va llenando la matriz
+        for (int i = 0; i < clientes.size(); i++) {
+            matrizInfo[i][0] = clientes.get(i).getId()+"";
+            matrizInfo[i][1] = clientes.get(i).getCedula()+"";
+            matrizInfo[i][2] = clientes.get(i).getNombre()+"";
+            matrizInfo[i][3] = clientes.get(i).getDirecion()+"";
+            matrizInfo[i][4] = clientes.get(i).getTelefono()+"";
+            matrizInfo[i][5] = clientes.get(i).getCorreo()+"";
+            matrizInfo[i][6] = clientes.get(i).getCargo()+"";
+        }
+        //retorna la matriz
+      return matrizInfo;  
+        
+    }
+    
+    //Metodo para construir la Tabla con la informaci[on de la matriz construida anterior mente
+    private void construirTabla(){
+        //se inicializa la tabla
+        tblTabla = new JTable();
+        //se setea la tabla y s ele pasa la matriz que se lleno en el metodo obtenerMatriz() 
+        //y el nombre de los titulos de las columnas
+        tblTabla.setModel(new DefaultTableModel(
+                obtenerMatriz(),
+                new String[] {
+                    "Id", "Cedula", "Nombre", "Direccion", "Telefono", "Correo", "Cargo"
+                }
+        ));
+        scrollPanel.setViewportView(tblTabla);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,6 +117,9 @@ public class Registro extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         txtCargo = new org.edisoncor.gui.textField.TextField();
         txtId = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        scrollPanel = new javax.swing.JScrollPane();
+        tblTabla = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -183,6 +228,44 @@ public class Registro extends javax.swing.JFrame {
         txtId.setEnabled(false);
         panelShadow1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 50, -1));
 
+        jButton1.setText("listar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        panelShadow1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, -1, -1));
+
+        tblTabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Cedula", "Nombre", "Direccion", "Telefono", "Correo", "Cargo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        scrollPanel.setViewportView(tblTabla);
+
+        panelShadow1.add(scrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 820, 100));
+
         panel1.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 860, 570));
 
         getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 720));
@@ -221,7 +304,7 @@ public class Registro extends javax.swing.JFrame {
         controlador = new controladorCliente();
         //se envia el objeto Cliente creado al metodo resgistrarCliente
         controlador.registrarCliente(cliente);
-        
+        construirTabla();
         
         
        
@@ -260,6 +343,7 @@ public class Registro extends javax.swing.JFrame {
         controlador = new controladorCliente();
         //se envia el objeto Cliente al metodo ActualizarCliente
         controlador.ActualizarCliente(cliente);
+        construirTabla();
         
         
         
@@ -345,6 +429,15 @@ public class Registro extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        List<Cliente> clientes = new ArrayList<>();
+        
+        
+        
+        controlador.listarClientes();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
      
     /**
@@ -391,6 +484,7 @@ public class Registro extends javax.swing.JFrame {
     public rojeru_san.RSButtonRiple btnGuardar;
     public rojeru_san.RSButtonRiple btnLimpiar;
     public rojeru_san.RSButtonRiple btnModificar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -400,6 +494,8 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.panel.PanelShadow panelShadow1;
+    private javax.swing.JScrollPane scrollPanel;
+    private javax.swing.JTable tblTabla;
     public org.edisoncor.gui.textField.TextField txtBuscar;
     public org.edisoncor.gui.textField.TextField txtCargo;
     public org.edisoncor.gui.textField.TextField txtCedula;

@@ -6,6 +6,8 @@ package com.Controlador;
 
 import com.Modelo.Cliente;
 import com.Modelo.ConsultaClientes;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -66,6 +68,18 @@ public class controladorCliente {
             return true;
         }else
             return false;
+    }
+    
+    public ArrayList listarClientes(){
+        //Se crea el array donde se almacenaran todos los clientes
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        //Se inicializa el modelo ConsultaClientes
+        operacion = new ConsultaClientes();
+        //la variable clientes almacena el resultado de la consulta en el metodo listar
+        clientes = operacion.listar();
+        //retorna el array de clientes
+        return clientes;
+        
     }
     
 }

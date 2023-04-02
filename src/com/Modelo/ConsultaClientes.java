@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -166,5 +168,55 @@ public class ConsultaClientes extends Conexion{
                 System.err.println(e);
             }
         }
+    }
+    
+    //Metodo Listar clientes
+    public ArrayList listar(){
+        //Se inicializan las variables para la conexión a la base de datos
+        PreparedStatement ps = null;
+        Connection con = getConexion();
+        ResultSet rs = null;
+        
+        //Se crea el array donde se almacenaran todos los clientes
+        ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+        Cliente cliente;
+        
+         try {
+             
+            //Se crea la Consulta SQL
+            String sql = "select * from cliente";
+             //Se le asigana la consulta al prepareStatement
+            //y se settean cada uno de los datos recibidos en el objeto cliente
+            //y se agregas al prepareStatement para asocialos a la consulta
+            ps = con.prepareStatement(sql);
+            //Ejecuta la consulta
+            rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                cliente = new Cliente();
+                cliente.setId(rs.getInt(1));
+                cliente.setCedula(rs.getString(2));
+                cliente.setNombre(rs.getString(3));
+                cliente.setDirecion(rs.getString(4));
+                cliente.setTelefono(rs.getString(5));
+                cliente.setCorreo(rs.getString(6));
+                cliente.setCargo(rs.getString(7));
+                clientes.add(cliente);
+            }
+            rs.close();
+            ps.close();
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+        }finally {
+            try {
+                //Cierra la conexion a la base de datos
+                con.close();
+                } catch (SQLException e) {
+                    System.err.println(e);
+             }
+         }
+        return clientes;
+        
+        
     }
 }
