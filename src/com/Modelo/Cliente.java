@@ -7,6 +7,7 @@ package com.Modelo;
 /**
  *
  * @author JHON
+ * Modelo Cliente 
  */
 public class Cliente {
     private int id;
@@ -17,9 +18,11 @@ public class Cliente {
     private String correo;
     private String cargo;
 
+    //constructor vacio
     public Cliente() {
     }
 
+    //constructor con todos los datos
     public Cliente(int id, String cedula, String nombre, String direcion, String telefono, String correo, String cargo) {
         this.id = id;
         this.cedula = cedula;
@@ -31,7 +34,7 @@ public class Cliente {
     }
 
     
-    
+    //Metodos getter y setter
     public int getId() {
         return id;
     }
@@ -88,11 +91,6 @@ public class Cliente {
         this.cargo = cargo;
     }
     
-    
-    public void test(){
-        
-    }
-    
-    
+       
     
 }
