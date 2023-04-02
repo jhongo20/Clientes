@@ -27,21 +27,21 @@ import javax.swing.table.DefaultTableModel;
  * @author Darwing Hernandez
  */
 public class Registro extends javax.swing.JFrame {
-    private Cliente c = new Cliente();
+    private Cliente cliente; // = new Cliente();
     private ConsultaClientes operacion;
-    private controladorCliente controlador = new controladorCliente();;
+    private controladorCliente controlador;
     /**
      * Creates new form Registro
      */
     public Registro() {
         initComponents();
+        //se le coloca titulo al formulario
         this.setTitle("Registrar Cliente");
+        //Se sentra el formulario
         this.setLocationRelativeTo(this);
+        //oculta del formulario el campo Id del formulario
         this.txtId.setVisible(false);
-        
-//        Conexion conex = new Conexion();
-//        conex.getConexion();
-      
+
     }
 
     /**
@@ -195,17 +195,21 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
         
+        // Se almacenan en las variables la información tipeada en cada uno
+        //de los campos del formulario        
         String ced = this.txtCedula.getText();
         String nom = this.txtNombre.getText();
         String dir = this.txtDireccion.getText();
         String tel = this.txtTelefono.getText();
         String correo = this.txtCorreo.getText();
         String cargo = this.txtCargo.getText();
+
+        //se inicializa el modelo del objeto cliente
+        cliente = new Cliente();
         
-        Cliente cliente = new Cliente();
-        
+        //se crea el objeto Cliente, asiganadole la información tipeada por el 
+        //usuario en el formulario
         cliente.setCedula(ced);
         cliente.setNombre(nom);
         cliente.setDirecion(dir);
@@ -213,9 +217,10 @@ public class Registro extends javax.swing.JFrame {
         cliente.setCorreo(correo);
         cliente.setCargo(cargo);
         
-        controladorCliente controller = new controladorCliente();
-        
-        controller.registrarCliente(cliente);
+        //Se inicializa el controlador
+        controlador = new controladorCliente();
+        //se envia el objeto Cliente creado al metodo resgistrarCliente
+        controlador.registrarCliente(cliente);
         
         
         
@@ -228,7 +233,8 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarKeyReleased
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+        // Se almacenan en las variables la información tipeada en cada uno
+        //de los campos del formulario       
         String ced = this.txtCedula.getText();
         String nom = this.txtNombre.getText();
         String dir = this.txtDireccion.getText();
@@ -237,8 +243,11 @@ public class Registro extends javax.swing.JFrame {
         String cargo = this.txtCargo.getText();
         int id = Integer.parseInt(this.txtId.getText());
         
-        Cliente cliente = new Cliente();
+        //se inicializa el modelo del objeto cliente
+        cliente = new Cliente();
         
+        //se le asigana la información tipeada por el 
+        //usuario en el formulario al objeto Cliente
         cliente.setCedula(ced);
         cliente.setNombre(nom);
         cliente.setDirecion(dir);
@@ -247,43 +256,52 @@ public class Registro extends javax.swing.JFrame {
         cliente.setCargo(cargo);
         cliente.setId(id);
         
-        controladorCliente controller = new controladorCliente();
-        
-        controller.ActualizarCliente(cliente);
+        //Se inicializa el controlador
+        controlador = new controladorCliente();
+        //se envia el objeto Cliente al metodo ActualizarCliente
+        controlador.ActualizarCliente(cliente);
         
         
         
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-     
+        // Se guarda en la variable buscar la información tipeada en el campo buscar     
         String buscar = this.txtBuscar.getText();
         
+        //Se valida que el campo no este vacio
         if (buscar.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Buscar no puede estar vacio");
         }
-         Cliente cliente = new Cliente();
-         
+        
+        //Se inicaliza el objeto Cliente
+        cliente = new Cliente();
+        //se le asigna la infromación almacenada en la variable buscar a la 
+        //variable cedula del objeto Cliente
         cliente.setCedula(buscar);
         
-        c = null;
-        c = controlador.buscar(cliente);
+        //Se inicializa el controllador
+        controlador = new controladorCliente();
+        //enviamos al metodo buscar el objeto creado
+        controlador.buscar(cliente);
         
-        this.txtCedula.setText(c.getCedula());
-        this.txtNombre.setText(c.getNombre());
-        this.txtDireccion.setText(c.getDirecion());
-        this.txtTelefono.setText(c.getTelefono());
-        this.txtCorreo.setText(c.getCorreo());
-        this.txtCargo.setText(c.getCargo());
-        this.txtId.setText(Integer.toString(c.getId()));
+        //asignamos la información obtenida del metodo buscar a cada uno de los 
+        //campos del formulario
+        this.txtCedula.setText(cliente.getCedula());
+        this.txtNombre.setText(cliente.getNombre());
+        this.txtDireccion.setText(cliente.getDirecion());
+        this.txtTelefono.setText(cliente.getTelefono());
+        this.txtCorreo.setText(cliente.getCorreo());
+        this.txtCargo.setText(cliente.getCargo());
+        this.txtId.setText(Integer.toString(cliente.getId()));
         
         
        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+        // Se almacenan en las variables la información tipeada en cada uno
+        //de los campos del formulario 
         String ced = this.txtCedula.getText();
         String nom = this.txtNombre.getText();
         String dir = this.txtDireccion.getText();
@@ -291,20 +309,32 @@ public class Registro extends javax.swing.JFrame {
         String correo = this.txtCorreo.getText();
         String cargo = this.txtCargo.getText();
         String buscar = this.txtBuscar.getText();
+        //Se inicializa el controllador
+        controlador = new controladorCliente();
         
         
+        //Se valida que los campos del formulario tengan infromación antes de borrar
         if (ced.isEmpty() && nom.isEmpty() && dir.isEmpty() && tel.isEmpty() && 
                 correo.isEmpty() && cargo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos los campos no pueden estar vacios");
-        }
-        if (buscar.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "El campo Buscar no puede estar vacio");
-        }
+            JOptionPane.showMessageDialog(null, "Debe haber un Cliente cargado");
+        }else
+            //Se valida que el campo buscar tenga un texto para hacer la consulta antes de eliminar
+            if (buscar.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "El campo Buscar no puede estar vacio");
+            }else{
+                //enviamos al metodo buscar el objeto creado y valida si la respuesta recibida es true
+                if(controlador.eliminarCliente(cliente)){
+                    JOptionPane.showMessageDialog(null, "Cliente eliminado con Exito");
+                }else
+                    //muestra el mensaje en caso de que no se pueda eliminar el Cliente
+                    JOptionPane.showMessageDialog(null, "No se pudo eliminar el cliente");
+            }
+            
         
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        // se setean todas los campos del formulario a vacio
         this.txtBuscar.setText("");
         this.txtCedula.setText("");
         this.txtNombre.setText("");

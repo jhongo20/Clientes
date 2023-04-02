@@ -49,4 +49,13 @@ public class controladorCliente {
             JOptionPane.showMessageDialog(null, "No se puede Actualizar el cliente");
         }
     }
+    
+    public boolean eliminarCliente(Cliente c){
+        operacion = new ConsultaClientes();
+        if (operacion.eliminar(c)) {
+            return true;
+        }else
+            return false;
+    }
+    
 }
