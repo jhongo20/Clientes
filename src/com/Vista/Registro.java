@@ -101,7 +101,6 @@ public class Registro extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         txtNombre = new org.edisoncor.gui.textField.TextField();
         txtCedula = new org.edisoncor.gui.textField.TextField();
         txtDireccion = new org.edisoncor.gui.textField.TextField();
@@ -109,17 +108,18 @@ public class Registro extends javax.swing.JFrame {
         txtCorreo = new org.edisoncor.gui.textField.TextField();
         btnModificar = new rojeru_san.RSButtonRiple();
         btnGuardar = new rojeru_san.RSButtonRiple();
-        btnBuscar = new rojeru_san.RSButtonRiple();
-        txtBuscar = new org.edisoncor.gui.textField.TextField();
         jLabel8 = new javax.swing.JLabel();
         btnBorrar = new rojeru_san.RSButtonRiple();
         btnLimpiar = new rojeru_san.RSButtonRiple();
         jLabel9 = new javax.swing.JLabel();
         txtCargo = new org.edisoncor.gui.textField.TextField();
         txtId = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         scrollPanel = new javax.swing.JScrollPane();
         tblTabla = new javax.swing.JTable();
+        panelShadow2 = new org.edisoncor.gui.panel.PanelShadow();
+        jLabel7 = new javax.swing.JLabel();
+        txtBuscar = new org.edisoncor.gui.textField.TextField();
+        btnBuscar = new rojeru_san.RSButtonRiple();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -151,11 +151,6 @@ public class Registro extends javax.swing.JFrame {
         jLabel5.setText("Teléfono:");
         panelShadow1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, 155, 40));
 
-        jLabel7.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Buscar");
-        panelShadow1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, 90, 40));
-
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreActionPerformed(evt);
@@ -182,21 +177,6 @@ public class Registro extends javax.swing.JFrame {
             }
         });
         panelShadow1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 60, 140, 40));
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        panelShadow1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 480, 140, 40));
-
-        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyReleased(evt);
-            }
-        });
-        panelShadow1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 488, 490, 30));
 
         jLabel8.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -228,14 +208,6 @@ public class Registro extends javax.swing.JFrame {
         txtId.setEnabled(false);
         panelShadow1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 50, -1));
 
-        jButton1.setText("listar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        panelShadow1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, -1, -1));
-
         tblTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -264,9 +236,34 @@ public class Registro extends javax.swing.JFrame {
         });
         scrollPanel.setViewportView(tblTabla);
 
-        panelShadow1.add(scrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 820, 100));
+        panelShadow1.add(scrollPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 820, 180));
 
-        panel1.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 860, 570));
+        panel1.add(panelShadow1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 860, 570));
+
+        panelShadow2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscador", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 24), new java.awt.Color(255, 255, 255))); // NOI18N
+        panelShadow2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Lucida Sans Unicode", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Buscar");
+        panelShadow2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 90, 40));
+
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+        });
+        panelShadow2.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 220, 30));
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        panelShadow2.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 140, -1));
+
+        panel1.add(panelShadow2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 70, 240, 180));
 
         getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1180, 720));
 
@@ -346,7 +343,6 @@ public class Registro extends javax.swing.JFrame {
         construirTabla();
         
         
-        
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -357,7 +353,6 @@ public class Registro extends javax.swing.JFrame {
         if (buscar.isEmpty()) {
             JOptionPane.showMessageDialog(null, "El campo Buscar no puede estar vacio");
         }
-        
         //Se inicaliza el objeto Cliente
         cliente = new Cliente();
         //se le asigna la infromación almacenada en la variable buscar a la 
@@ -379,8 +374,6 @@ public class Registro extends javax.swing.JFrame {
         this.txtCargo.setText(cliente.getCargo());
         this.txtId.setText(Integer.toString(cliente.getId()));
         
-        
-       
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
@@ -395,7 +388,6 @@ public class Registro extends javax.swing.JFrame {
         String buscar = this.txtBuscar.getText();
         //Se inicializa el controllador
         controlador = new controladorCliente();
-        
         
         //Se valida que los campos del formulario tengan infromación antes de borrar
         if (ced.isEmpty() && nom.isEmpty() && dir.isEmpty() && tel.isEmpty() && 
@@ -413,8 +405,6 @@ public class Registro extends javax.swing.JFrame {
                     //muestra el mensaje en caso de que no se pueda eliminar el Cliente
                     JOptionPane.showMessageDialog(null, "No se pudo eliminar el cliente");
             }
-            
-        
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
@@ -428,15 +418,6 @@ public class Registro extends javax.swing.JFrame {
         this.txtCargo.setText("");
         
     }//GEN-LAST:event_btnLimpiarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        List<Cliente> clientes = new ArrayList<>();
-        
-        
-        
-        controlador.listarClientes();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
      
@@ -484,7 +465,6 @@ public class Registro extends javax.swing.JFrame {
     public rojeru_san.RSButtonRiple btnGuardar;
     public rojeru_san.RSButtonRiple btnLimpiar;
     public rojeru_san.RSButtonRiple btnModificar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -494,6 +474,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private org.edisoncor.gui.panel.Panel panel1;
     private org.edisoncor.gui.panel.PanelShadow panelShadow1;
+    private org.edisoncor.gui.panel.PanelShadow panelShadow2;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JTable tblTabla;
     public org.edisoncor.gui.textField.TextField txtBuscar;
